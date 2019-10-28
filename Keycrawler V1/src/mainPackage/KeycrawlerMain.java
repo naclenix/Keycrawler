@@ -1,29 +1,19 @@
 package mainPackage;
 import java.util.Scanner; 
   
-/* 
-* The player will be able to input a certain command to move forward in the game, i.e. "go north" or "get sword". 
-* If the player inputs anything else, they'll get a 'syntax error'. 
-* The player will go to different rooms, investigate said rooms, and find the keys hidden within. They are letters. The final puzzle is a word scramble. 
-* I'm not sorry. 
-* This game is probably waaaay too complicated for my first project in this class. 
-*/ 
-//JOptionPane.showMessageDialog(""); 
 
-//ctrl-shift-l: show active keybindings. trackpad is dead.
 public class KeycrawlerMain { 
      
     Scanner scanner = new Scanner(System.in); 
     String command = new String(); 
-    int roomInt; 
-    int a; 
-    int pencil; 
-    int diffuser; 
-    int b; 
+    boolean a; 
+    boolean pencil; 
+    boolean diffuser; 
+    boolean b; 
     boolean kiwi; 
     boolean lime; 
     boolean cube; 
-    int c; 
+    boolean c; 
      
     public static void main(String args[]) { 
          
@@ -38,13 +28,13 @@ public class KeycrawlerMain {
                 + "\nCommands are: 'go east'; 'go north'; 'go south'; 'go west'; 'go back'; 'get [item]'; and 'use [item]'." 
                 + "\nThe command 'go back' returns you to the center. No matter what, you are always facing north." 
                 + "\nWrite 'start' to start."); 
-        a = 0; 
-        pencil = 0; 
-        diffuser = 0; 
-        b = 0; 
+        a = false; 
+        pencil = false; 
+        diffuser = false; 
+        b = false; 
         kiwi = false; 
         lime = false;         
-        c = 0; 
+        c = false; 
         command = scanner.nextLine(); 
          
         if (command.equalsIgnoreCase("start")) 
@@ -157,7 +147,7 @@ public class KeycrawlerMain {
     } 
      
     public void firstRoomKeyGot() { 
-        a = 1; 
+        a = true; 
         System.out.println("You got Key E!"); 
          
         command = scanner.nextLine(); 
@@ -194,10 +184,10 @@ public class KeycrawlerMain {
         else if (command.equalsIgnoreCase("go east")) { 
             firstRoomEast(); 
         }         
-        else if (((command.equalsIgnoreCase("go north")) || (command.equalsIgnoreCase("use key"))) && (a == 1)) { 
+        else if (((command.equalsIgnoreCase("go north")) || (command.equalsIgnoreCase("use key"))) && (a == true)) { 
             secondRoomStart(); 
         } 
-        else if (((command.equalsIgnoreCase("go north")) || (command.equalsIgnoreCase("use key"))) && (a != 1)) { 
+        else if (((command.equalsIgnoreCase("go north")) || (command.equalsIgnoreCase("use key"))) && (!a)) { 
             firstRoomNorth(); 
         } 
         else if (command.equalsIgnoreCase("go south")) { 
@@ -312,17 +302,17 @@ public class KeycrawlerMain {
         System.out.println("\nYou pull out a gray pencil." 
                 + "\nIt is not a key at all. It seems like a normal writing implement except for the U carved into its side." 
                 + "\nYou got the Pencil!"); 
-        pencil = 1; 
+        pencil = true; 
          
-        if ((diffuser == 1) && (pencil == 1)) { 
-            b = 1; 
+        if ((diffuser == true) && (pencil == true)) { 
+            b = true; 
             System.out.println("\nYou look at the pencil, then back to the diffuser. Hmm." 
                     + "\nThen you slide the diffuser up the pencil." 
                     + "\nIt fits perfectly, and now the conglomeration looks sort of like a very crappy key." 
                     + "\nYou got Key U!"); 
         }         
         else { 
-            b = 0; 
+            b = false; 
         } 
          
         command = scanner.nextLine(); 
@@ -355,10 +345,10 @@ public class KeycrawlerMain {
         else if (command.equalsIgnoreCase("go east")) { 
             secondRoomEast(); 
         }         
-        else if ((command.equalsIgnoreCase("go north")) || (command.equalsIgnoreCase("use key")) && (b == 1))  { 
+        else if ((command.equalsIgnoreCase("go north")) || (command.equalsIgnoreCase("use key")) && (b == true))  { 
             thirdRoomStart(); 
         } 
-        else if (command.equalsIgnoreCase("go north") && (b != 1)) { 
+        else if (command.equalsIgnoreCase("go north") && (!b)) { 
             secondRoomNorth(); 
         } 
         else if (command.equalsIgnoreCase("go south")) { 
@@ -424,22 +414,22 @@ public class KeycrawlerMain {
     } 
      
     public void secondRoomDiffuserGet() {
-    	if (b == 0) {
+    	if (!b) {
     		System.out.println("You tentatively reach down into the space and tug at something on the wall." 
                 	+ "\nIt pops free with no resistance. It is not a diffuser, but a tiny purple metal...thing." 
                 	+ "\nIt has a hexagonal hole in the middle and a few grooves on the sides." 
                 	+ "\nYou got the Diffuser!"); 
-        	diffuser = 1; 
+        	diffuser = true; 
          
-        	if ((diffuser == 1) && (pencil == 1)) { 
-            	b = 1; 
+        	if ((diffuser == true) && (pencil == true)) { 
+            	b = true; 
             	System.out.println("\nYou look at the diffuser, then back to the pencil. Hmm." 
                     	+ "\nThen you slide the diffuser up the pencil." 
                     	+ "\nIt fits perfectly, and now the conglomeration looks sort of like a very crappy key." 
                     	+ "\nYou got Key U!"); 
         	}             	
         	else { 
-            	b = 0; 
+            	b = false; 
         	}
     	}
     	else {
@@ -546,7 +536,7 @@ public class KeycrawlerMain {
     	}
         else {
         	System.out.println("The tree is still here. Now that you look at it, it's really more of a vine."
-        			+ "The fruit is gone, because you have it.");
+        			+ "\nThe fruit is gone, because you have it.");
         	command = scanner.nextLine();
         	
             if (command.equalsIgnoreCase("go back")) { 
@@ -668,7 +658,7 @@ public class KeycrawlerMain {
     } 
   
     public void thirdRoomNorth() { 
-        if (c != 1) {
+        if (!c) {
         	System.out.println("The way forward is locked, as always. The keyhole is gold this time, and rectangular." 
         			+ "\nThere is a sign on this door. It contains the crude drawings of:" 
         			+ "\na fuzzy, round thing; an oval shape with pinched ends; and a square." 
@@ -774,7 +764,7 @@ public class KeycrawlerMain {
                 + "\nSomething small and hard drops from the ceiling and lands on your head with a CLINK."
                 + "\nIt is a green metal card of some sort, embossed with the letter S." 
                 + "\nYou got Key S!"); 
-        c = 1; 
+        c = true; 
         command = scanner.nextLine(); 
         
         if (command.equalsIgnoreCase("go back")) { 
@@ -888,7 +878,7 @@ public class KeycrawlerMain {
     
     public void finalRoomKeyGet() {
     	System.out.println("You write 'USE' onto the paper. Of course the darn thing was a word scramble."
-    			+ "\nYou step back. This is exactly what you thought would happen. How does writing things on a paper activate something?"
+    			+ "\nYou step back. This is exactly what you thought would happen. How could writing things on a paper activate something?"
     			+ "\nAnd then you blink and the table's gone. In its place is a door. White, with a brass knob and no keyhole."
     			+ "\nIt could be the way out. It could just be another room."
     			+ "\nBut there's nothing else for you here."
