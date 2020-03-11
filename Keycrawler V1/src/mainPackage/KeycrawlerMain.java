@@ -433,7 +433,7 @@ public class KeycrawlerMain {
         	}
     	}
     	else {
-    		System.out.println("The smell has disippated somewhat.");
+    		System.out.println("The smell has dissipated somewhat.");
     	}
          
         command = scanner.nextLine(); 
